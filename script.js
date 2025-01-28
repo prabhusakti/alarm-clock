@@ -4,11 +4,13 @@ const secondHand = document.getElementById('second');
 const digitalClock = document.getElementById('digital-clock');
 const alarmInput = document.getElementById('alarm-time');
 const alarmAudio = document.getElementById('alarm-audio');
+const setAlarmButton = document.getElementById('set-alarm-button');
 
 let alarmTime = null;
 
-alarmInput.addEventListener('input', () => {
+setAlarmButton.addEventListener('click', () => {
   alarmTime = alarmInput.value;
+  alert(`Alarm set for ${alarmTime}`);
 });
 
 function updateClock() {
