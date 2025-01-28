@@ -85,7 +85,7 @@ body {
   text-align: center;
 }
 
-.alarm-container input {
+.alarm-container select {
   margin-left: 10px;
   padding: 5px;
   font-size: 14px;
@@ -106,5 +106,13 @@ body {
 }
 
 .alarm-container button:hover {
-  background-color: rgb(13, 70, 25);
+  background-color: #218838;
+}
+
+.alarm-container .stop-alarm {
+  background-color: #dc3545;
+}
+
+.alarm-container .stop-alarm:hover {
+  background-color: #c82333;
 }

@@ -8,6 +8,8 @@ const setAlarmButton = document.getElementById('set-alarm-button');
 const alarmAudio = document.getElementById('alarm-audio');
 
 let alarmTime = null;
+let alarmActive = false;
+let alarmPlaying = false;
 
 // Populate dropdowns
 for (let i = 0; i < 24; i++) {
@@ -25,18 +27,37 @@ for (let i = 0; i < 60; i++) {
 }
 
 setAlarmButton.addEventListener('click', () => {
-  const selectedHour = alarmHour.value;
-  const selectedMinute = alarmMinute.value;
+  if (!alarmActive && !alarmPlaying) {
+    const selectedHour = alarmHour.value;
+    const selectedMinute = alarmMinute.value;
 
-  if (selectedHour && selectedMinute) {
-    alarmTime = `${selectedHour}:${selectedMinute}:00`;
-    alert(`Alarm set for ${selectedHour}:${selectedMinute}:00`);
-    alarmAudio.play(); // To allow interaction-based audio play
-    alarmAudio.pause();
-    alarmAudio.currentTime = 0;
+    if (selectedHour && selectedMinute) {
+      alarmTime = `${selectedHour}:${selectedMinute}:00`;
+      alarmActive = true;
+      alert(`Alarm set for ${selectedHour}:${selectedMinute}`);
+      setAlarmButton.textContent = 'Stop Alarm';
+      setAlarmButton.classList.add('stop-alarm');
+    } else {
+      alert('Please select both hour and minute.');
+    }
   } else {
-    alert('Please select both hour and minute.');
+    alarmTime = null;
+    alarmActive = false;
+    alert(`Your alarm at time ${alarmHour.value}:${alarmMinute.value} is cancelled.`);
+    setAlarmButton.textContent = 'Set Alarm';
+    setAlarmButton.classList.remove('stop-alarm');
+    if (alarmPlaying) {
+      alarmAudio.pause();
+      alarmAudio.currentTime = 0;
+      alarmPlaying = false;
+    }
   }
+});
+
+alarmAudio.addEventListener('ended', () => {
+  alarmPlaying = false;
+  setAlarmButton.textContent = 'Set Alarm';
+  setAlarmButton.classList.remove('stop-alarm');
 });
 
 function updateClock() {
@@ -59,8 +80,10 @@ function updateClock() {
 
   digitalClock.textContent = `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
 
-  if (alarmTime === `${formattedHours}:${formattedMinutes}:00`) {
+  if (alarmTime === `${formattedHours}:${formattedMinutes}:00` && alarmActive) {
     alarmAudio.play();
+    alarmPlaying = true;
+    alarmActive = false;
   }
 }
 
