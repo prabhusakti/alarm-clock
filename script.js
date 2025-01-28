@@ -2,6 +2,14 @@ const hourHand = document.getElementById('hour');
 const minuteHand = document.getElementById('minute');
 const secondHand = document.getElementById('second');
 const digitalClock = document.getElementById('digital-clock');
+const alarmInput = document.getElementById('alarm-time');
+const alarmAudio = document.getElementById('alarm-audio');
+
+let alarmTime = null;
+
+alarmInput.addEventListener('input', () => {
+  alarmTime = alarmInput.value;
+});
 
 function updateClock() {
   const now = new Date();
@@ -22,6 +30,10 @@ function updateClock() {
   const formattedSeconds = seconds.toString().padStart(2, '0');
 
   digitalClock.textContent = `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+
+  if (alarmTime === `${formattedHours}:${formattedMinutes}:${formattedSeconds}`) {
+    alarmAudio.play();
+  }
 }
 
 setInterval(updateClock, 1000);

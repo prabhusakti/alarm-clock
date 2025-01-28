@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Analog and Digital Clock</title>
+  <title>Analog and Digital Clock with Alarm</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -16,8 +16,12 @@
     <div class="hand minute" id="minute"></div>
     <div class="hand second" id="second"></div>
   </div>
-  <br>
   <div class="digital-clock" id="digital-clock"></div>
+  <div class="alarm-container">
+    <label for="alarm-time">Set Alarm (HH:MM:SS):</label>
+    <input type="text" id="alarm-time" placeholder="HH:MM:SS">
+  </div>
+  <audio id="alarm-audio" src="audio.mp3"></audio>
   <script src="script.js"></script>
 </body>
 </html>
