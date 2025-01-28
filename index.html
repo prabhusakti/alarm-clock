@@ -18,8 +18,13 @@
   </div>
   <div class="digital-clock" id="digital-clock"></div>
   <div class="alarm-container">
-    <label for="alarm-time">Set Alarm (HH:MM:SS):</label>
-    <input type="text" id="alarm-time" placeholder="HH:MM:SS">
+    <label for="alarm-hour">Set Alarm:</label>
+    <select id="alarm-hour">
+      <option value="">Hour</option>
+    </select>
+    <select id="alarm-minute">
+      <option value="">Minute</option>
+    </select>
     <button id="set-alarm-button">Set Alarm</button>
   </div>
   <audio id="alarm-audio" src="audio.mp3"></audio>
