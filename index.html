@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Analog and Digital Clock with Alarm</title>
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
+  <div class="info">
+    <marquee><b>Note:</b> Please make sure that the system is not on mute, to hear the alarm.</marquee>
+  </div>
   <div class="clock">
     <div class="number" style="top: 10%; left: 50%;">12</div>
     <div class="number" style="top: 50%; left: 90%;">3</div>
@@ -27,7 +32,11 @@
     </select>
     <button id="set-alarm-button">Set Alarm</button>
   </div>
+  <div class="credits">
+    <p>Made with ❤️ by <a target="_blank" href="https://www.linkedin.com/in/prabhusakti-nayak/">Prabhusakti Nayak</a></p>
+  </div>
   <audio id="alarm-audio" src="audio.mp3"></audio>
   <script src="script.js"></script>
 </body>
+
 </html>

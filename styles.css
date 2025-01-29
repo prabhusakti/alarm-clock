@@ -10,6 +10,12 @@ body {
   background-color: beige;
 }
 
+.info{
+  width: -webkit-fill-available;
+  position:absolute;
+  top: 30px;
+}
+
 .clock {
   position: relative;
   width: 200px;
@@ -115,4 +121,9 @@ body {
 
 .alarm-container .stop-alarm:hover {
   background-color: #c82333;
+}
+
+.credits {
+  position: absolute;
+  bottom: 20px;
 }
