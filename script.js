@@ -11,26 +11,25 @@ let alarmTime = null;
 let alarmActive = false;
 let alarmPlaying = false;
 
-// Populate dropdowns
-for (let i = 0; i < 24; i++) {
-  const option = document.createElement('option');
-  option.value = i.toString().padStart(2, '0');
-  option.textContent = i.toString().padStart(2, '0');
-  alarmHour.appendChild(option);
+// Helper to populate select
+function populateSelect(select, max, selectedValue) {
+  for (let i = 0; i < max; i++) {
+    const option = document.createElement('option');
+    option.value = option.textContent = i.toString().padStart(2, '0');
+    if (i === selectedValue) option.selected = true;
+    select.appendChild(option);
+  }
 }
 
-for (let i = 0; i < 60; i++) {
-  const option = document.createElement('option');
-  option.value = i.toString().padStart(2, '0');
-  option.textContent = i.toString().padStart(2, '0');
-  alarmMinute.appendChild(option);
-}
+// Preselect current time
+const now = new Date();
+populateSelect(alarmHour, 24, now.getHours());
+populateSelect(alarmMinute, 60, now.getMinutes());
 
 setAlarmButton.addEventListener('click', () => {
   if (!alarmActive && !alarmPlaying) {
     const selectedHour = alarmHour.value;
     const selectedMinute = alarmMinute.value;
-
     if (selectedHour && selectedMinute) {
       alarmTime = `${selectedHour}:${selectedMinute}:00`;
       alarmActive = true;
@@ -66,18 +65,13 @@ function updateClock() {
   const minutes = now.getMinutes();
   const hours = now.getHours();
 
-  const secondDegree = (seconds / 60) * 360;
-  const minuteDegree = (minutes / 60) * 360 + (seconds / 60) * 6;
-  const hourDegree = ((hours % 12) / 12) * 360 + (minutes / 60) * 30;
-
-  secondHand.style.transform = `translate(-50%, -100%) rotate(${secondDegree}deg)`;
-  minuteHand.style.transform = `translate(-50%, -100%) rotate(${minuteDegree}deg)`;
-  hourHand.style.transform = `translate(-50%, -100%) rotate(${hourDegree}deg)`;
+  secondHand.style.transform = `translate(-50%, -100%) rotate(${(seconds / 60) * 360}deg)`;
+  minuteHand.style.transform = `translate(-50%, -100%) rotate(${(minutes / 60) * 360 + (seconds / 60) * 6}deg)`;
+  hourHand.style.transform = `translate(-50%, -100%) rotate(${((hours % 12) / 12) * 360 + (minutes / 60) * 30}deg)`;
 
   const formattedHours = hours.toString().padStart(2, '0');
   const formattedMinutes = minutes.toString().padStart(2, '0');
   const formattedSeconds = seconds.toString().padStart(2, '0');
-
   digitalClock.textContent = `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
 
   if (alarmTime === `${formattedHours}:${formattedMinutes}:00` && alarmActive) {
